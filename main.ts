@@ -60,4 +60,5 @@ let s2 = 0
 let s1 = 0
 DFRobotMaqueenPlus.I2CInit()
 radio.setGroup(127)
+DFRobotMaqueenPlus.mototStop(Motors.ALL)
 basic.showIcon(IconNames.SmallHeart)
