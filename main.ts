@@ -31,8 +31,10 @@ input.onButtonPressed(Button.B, function () {
     DFRobotMaqueenPlus.mototStop(Motors.ALL)
 })
 radio.onReceivedValue(function (name, value) {
+    basic.showString(name)
     basic.showIcon(IconNames.Silly)
     if (name == "speed") {
+        basic.showIcon(IconNames.Snake)
         s1 = DFRobotMaqueenPlus.readSpeed(Motors1.M1) + value
         s2 = DFRobotMaqueenPlus.readSpeed(Motors1.M2) + value
         d1 = DFRobotMaqueenPlus.readDirection(Motors1.M1)
