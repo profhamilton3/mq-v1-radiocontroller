@@ -1,4 +1,4 @@
-radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
+radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 1) {
         DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 100)
         basic.showIcon(IconNames.Heart)
@@ -8,12 +8,11 @@ radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
     } else {
         basic.showIcon(IconNames.Confused)
     }
-    
 })
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
+input.onButtonPressed(Button.A, function () {
     DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 200)
 })
-radio.onReceivedString(function on_received_string(receivedString: string) {
+radio.onReceivedString(function (receivedString) {
     if (receivedString == "UP") {
         DFRobotMaqueenPlus.servoRun(Servos.S1, 45)
     } else if (receivedString == "DN") {
@@ -21,13 +20,11 @@ radio.onReceivedString(function on_received_string(receivedString: string) {
     } else {
         basic.showIcon(IconNames.LeftTriangle)
     }
-    
 })
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
+input.onButtonPressed(Button.B, function () {
     DFRobotMaqueenPlus.mototStop(Motors.ALL)
 })
-radio.onReceivedValue(function on_received_value(name: string, value: number) {
-    
+radio.onReceivedValue(function (name, value) {
     if (name == "speed") {
         s1 = DFRobotMaqueenPlus.readSpeed(Motors1.M1) + value
         s2 = DFRobotMaqueenPlus.readSpeed(Motors1.M2) + value
@@ -40,7 +37,6 @@ radio.onReceivedValue(function on_received_value(name: string, value: number) {
         } else {
             basic.showIcon(IconNames.Angry)
         }
-        
         if (d2 == 1) {
             DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CW, s2)
         } else if (d2 == 2) {
@@ -48,7 +44,6 @@ radio.onReceivedValue(function on_received_value(name: string, value: number) {
         } else {
             basic.showIcon(IconNames.Angry)
         }
-        
     } else if (name == "vx") {
         x = value
     } else if (name == "vy") {
@@ -56,7 +51,6 @@ radio.onReceivedValue(function on_received_value(name: string, value: number) {
     } else {
         basic.showIcon(IconNames.StickFigure)
     }
-    
 })
 let y = 0
 let x = 0
