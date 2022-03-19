@@ -1,4 +1,9 @@
 radio.onReceivedNumber(function (receivedNumber) {
+    led.plotBarGraph(
+    Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength) + 42),
+    128 - 42
+    )
+    basic.showNumber(receivedNumber)
     if (receivedNumber == 1) {
         DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 100)
         basic.showIcon(IconNames.Heart)
@@ -13,18 +18,20 @@ input.onButtonPressed(Button.A, function () {
     DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 200)
 })
 radio.onReceivedString(function (receivedString) {
+    basic.showIcon(IconNames.LeftTriangle)
     if (receivedString == "UP") {
         DFRobotMaqueenPlus.servoRun(Servos.S1, 45)
     } else if (receivedString == "DN") {
         DFRobotMaqueenPlus.servoRun(Servos.S1, 0)
     } else {
-        basic.showIcon(IconNames.LeftTriangle)
+        basic.showIcon(IconNames.Chessboard)
     }
 })
 input.onButtonPressed(Button.B, function () {
     DFRobotMaqueenPlus.mototStop(Motors.ALL)
 })
 radio.onReceivedValue(function (name, value) {
+    basic.showIcon(IconNames.Silly)
     if (name == "speed") {
         s1 = DFRobotMaqueenPlus.readSpeed(Motors1.M1) + value
         s2 = DFRobotMaqueenPlus.readSpeed(Motors1.M2) + value
