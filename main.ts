@@ -1,8 +1,4 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    led.plotBarGraph(
-    Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength) + 42),
-    128 - 42
-    )
     basic.showNumber(receivedNumber)
     if (receivedNumber == 1) {
         DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 100)
@@ -20,7 +16,7 @@ input.onButtonPressed(Button.A, function () {
 radio.onReceivedString(function (receivedString) {
     basic.showIcon(IconNames.LeftTriangle)
     if (receivedString == "UP") {
-        DFRobotMaqueenPlus.servoRun(Servos.S1, 45)
+        DFRobotMaqueenPlus.servoRun(Servos.S1, 90)
     } else if (receivedString == "DN") {
         DFRobotMaqueenPlus.servoRun(Servos.S1, 0)
     } else {
@@ -31,7 +27,6 @@ input.onButtonPressed(Button.B, function () {
     DFRobotMaqueenPlus.mototStop(Motors.ALL)
 })
 radio.onReceivedValue(function (name, value) {
-    basic.showString(name)
     basic.showIcon(IconNames.Silly)
     if (name == "speed") {
         basic.showIcon(IconNames.Snake)
@@ -57,6 +52,13 @@ radio.onReceivedValue(function (name, value) {
         x = value
     } else if (name == "vy") {
         y = value
+        if (y < 500) {
+            DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CCW, DFRobotMaqueenPlus.readSpeed(Motors1.M1))
+            DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CCW, DFRobotMaqueenPlus.readSpeed(Motors1.M2))
+        } else {
+            DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CW, DFRobotMaqueenPlus.readSpeed(Motors1.M1))
+            DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CW, DFRobotMaqueenPlus.readSpeed(Motors1.M2))
+        }
     } else {
         basic.showIcon(IconNames.StickFigure)
     }
@@ -68,6 +70,7 @@ let d1 = 0
 let s2 = 0
 let s1 = 0
 DFRobotMaqueenPlus.I2CInit()
-radio.setGroup(127)
+radio.setGroup(1)
+radio.setFrequencyBand(16)
 DFRobotMaqueenPlus.mototStop(Motors.ALL)
-basic.showIcon(IconNames.SmallHeart)
+basic.showIcon(IconNames.SmallSquare)
