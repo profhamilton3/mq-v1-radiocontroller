@@ -1,3 +1,6 @@
+/**
+ * 90 is Lowered flat for scoop. 45 is up midway and 0 is all the way.
+ */
 radio.onReceivedNumber(function (receivedNumber) {
     basic.showNumber(receivedNumber)
     if (receivedNumber == 1) {
@@ -16,9 +19,9 @@ input.onButtonPressed(Button.A, function () {
 radio.onReceivedString(function (receivedString) {
     basic.showIcon(IconNames.LeftTriangle)
     if (receivedString == "UP") {
-        DFRobotMaqueenPlus.servoRun(Servos.S1, 90)
+        DFRobotMaqueenPlus.servoRun(Servos.S1, 45)
     } else if (receivedString == "DN") {
-        DFRobotMaqueenPlus.servoRun(Servos.S1, 0)
+        DFRobotMaqueenPlus.servoRun(Servos.S1, 90)
     } else {
         basic.showIcon(IconNames.Chessboard)
     }
