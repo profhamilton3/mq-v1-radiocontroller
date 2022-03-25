@@ -73,6 +73,7 @@ radio.onReceivedValue(function (name, value) {
         basic.showIcon(IconNames.StickFigure)
     }
 })
+let ObjDistCM = 0
 let y = 0
 let x = 0
 let d2 = 0
@@ -83,4 +84,15 @@ DFRobotMaqueenPlus.I2CInit()
 radio.setGroup(1)
 radio.setFrequencyBand(16)
 DFRobotMaqueenPlus.mototStop(Motors.ALL)
-basic.showIcon(IconNames.SmallSquare)
+basic.showIcon(IconNames.Triangle)
+basic.forever(function () {
+    ObjDistCM = DFRobotMaqueenPlus.ultraSonic(PIN.P1, PIN.P2)
+    if (ObjDistCM <= 10) {
+        radio.sendNumber(Math.round(ObjDistCM * 0.393701))
+        radio.sendNumber(ObjDistCM)
+        DFRobotMaqueenPlus.mototStop(Motors.ALL)
+        basic.pause(1000)
+    } else {
+        basic.pause(1000)
+    }
+})
