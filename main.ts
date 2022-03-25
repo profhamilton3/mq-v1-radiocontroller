@@ -53,14 +53,21 @@ radio.onReceivedValue(function (name, value) {
         }
     } else if (name == "vx") {
         x = value
+        if (x > 500) {
+            DFRobotMaqueenPlus.mototStop(Motors.M1)
+            DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CW, DFRobotMaqueenPlus.readSpeed(Motors1.M1))
+        } else {
+            DFRobotMaqueenPlus.mototStop(Motors.M2)
+            DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CW, DFRobotMaqueenPlus.readSpeed(Motors1.M2))
+        }
     } else if (name == "vy") {
         y = value
         if (y < 500) {
-            DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CCW, DFRobotMaqueenPlus.readSpeed(Motors1.M1))
-            DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CCW, DFRobotMaqueenPlus.readSpeed(Motors1.M2))
+            DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CCW, 125)
+        } else if (y >= 500) {
+            DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 125)
         } else {
-            DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CW, DFRobotMaqueenPlus.readSpeed(Motors1.M1))
-            DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CW, DFRobotMaqueenPlus.readSpeed(Motors1.M2))
+            basic.showIcon(IconNames.No)
         }
     } else {
         basic.showIcon(IconNames.StickFigure)
